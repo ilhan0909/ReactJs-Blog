@@ -11,9 +11,11 @@ function getAge(dateString) {
 const title = 'Welcome to my blog!';
 const department = 'Computer Engineer';
 const person = {name:'İlhan Bayramoğlu',country:'Turkey'};
-const link = 'https://github.com/ilhan0909'
+const link = 'https://github.com/ilhan0909';
 
 const Home = () => {
+
+    
     return ( 
         <div className="home">
         <h1>{title}</h1>
