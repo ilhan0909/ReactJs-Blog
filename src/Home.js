@@ -20,7 +20,12 @@ const Home = () => {
       { title: 'My new website', body: 'MARIO WROTE THIS HEHEH', author: 'mario', id: 1 },
       { title: 'Welcome party!', body: 'YOSHI ipsum...', author: 'yoshi', id: 2 },
       { title: 'Web dev top tips', body: 'MARIO ipsum...', author: 'mario', id: 3 }
-    ])
+    ]);
+
+    const handleDelete = (id) => {
+        const newBlogs = blogs.filter(blog => blog.id !== id );
+        setBlogs(newBlogs);
+    }
     
     return ( 
         <div className="home">
@@ -29,8 +34,8 @@ const Home = () => {
         <h2>I am a graduate {department} </h2>
         <h3>My name is {person.name}, i am {getAge("1998/06/25")} years old and i am from {person.country}.</h3>
         <a href={link}>Check My Github Profile</a>
-            <BlogList blogs={blogs} title="All Blogs are shown here" />
-            <BlogList blogs={blogs.filter((blog) => blog.author == 'mario')} title="Mario's Blogs Shown here" />
+            <BlogList blogs={blogs} title="All Blogs are shown here" handleDelete={handleDelete} />
+            
         </div>
      );
 }
