@@ -16,23 +16,18 @@ const person = {name:'İlhan Bayramoğlu',country:'Turkey'};
 const link = 'https://github.com/ilhan0909';
 
 const Home = () => {
-    const [blogs, setBlogs] = useState([
-      { title: 'My new website', body: 'MARIO WROTE THIS HEHEH', author: 'mario', id: 1 },
-      { title: 'Welcome party!', body: 'YOSHI ipsum...', author: 'yoshi', id: 2 },
-      { title: 'Web dev top tips', body: 'MARIO ipsum...', author: 'mario', id: 3 }
-    ]);
-
-    const [name, setName] = useState('mario');
-
-    const handleDelete = (id) => {
-        const newBlogs = blogs.filter(blog => blog.id !== id );
-        setBlogs(newBlogs);
-    }
-    
+    const [blogs, setBlogs] = useState(null);
+     
     useEffect(() => {
-        console.log('use effect ran');
-        console.log(name);        
-    }, [name]);
+        fetch('http://localhost:8000/blogs')
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                setBlogs(data);
+                
+            });        
+    }, []);
 
     
     return ( 
@@ -42,9 +37,7 @@ const Home = () => {
         <h2>I am a graduate {department} </h2>
         <h3>My name is {person.name}, i am {getAge("1998/06/25")} years old and i am from {person.country}.</h3>
         <a href={link}>Check My Github Profile</a>
-            <BlogList blogs={blogs} title="All Blogs are shown here" handleDelete={handleDelete} />
-            <button onClick={() => setName('İLHAN')}>Change Name</button>
-            <p>{ name }</p>
+            {blogs && <BlogList blogs={blogs} title="All Blogs are shown here"/>}
         </div>
      );
 }
