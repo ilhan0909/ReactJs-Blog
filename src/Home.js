@@ -17,6 +17,8 @@ const link = 'https://github.com/ilhan0909';
 
 const Home = () => {
     const [blogs, setBlogs] = useState(null);
+    const [isPending, setIsPending] =useState(true);
+
      
     useEffect(() => {
         fetch('http://localhost:8000/blogs')
@@ -25,19 +27,19 @@ const Home = () => {
             })
             .then(data => {
                 setBlogs(data);
-                
+                setIsPending(false);
             });        
     }, []);
 
     
     return ( 
-        <div className="home">
-            
+        <div className="home">            
         <h1>{ title }</h1>
         <h2>I am a graduate {department} </h2>
         <h3>My name is {person.name}, i am {getAge("1998/06/25")} years old and i am from {person.country}.</h3>
-        <a href={link}>Check My Github Profile</a>
-            {blogs && <BlogList blogs={blogs} title="All Blogs are shown here"/>}
+        <a href={link}>Check My Github Profile</a>     
+            { isPending && <div>Loading...</div> }
+            {blogs && <BlogList blogs={blogs} title="All Blogs are here"/>}
         </div>
      );
 }
