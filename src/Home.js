@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BlogList from "./BlogList";
 function getAge(dateString) {
     var today = new Date();
     var birthDate = new Date(dateString);
@@ -24,17 +25,11 @@ const Home = () => {
     return ( 
         <div className="home">
             
-        <h1>{title}</h1>
+        <h1>{ title }</h1>
         <h2>I am a graduate {department} </h2>
         <h3>My name is {person.name}, i am {getAge("1998/06/25")} years old and i am from {person.country}.</h3>
         <a href={link}>Check My Github Profile</a>
-        {blogs.map((blog) =>(
-                <div className="blog-preview" key={blog.id}>
-                    <h2>{ blog.title }</h2>
-                    <h4>Written by { blog.author }</h4>
-                    <p>{ blog.body }</p>
-                </div>
-            ))}
+            <BlogList blogs={blogs} title="All Blogs are shown here" />
         </div>
      );
 }
