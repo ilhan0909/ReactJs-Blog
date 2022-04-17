@@ -30,6 +30,7 @@ const Home = () => {
         <h3>My name is {person.name}, i am {getAge("1998/06/25")} years old and i am from {person.country}.</h3>
         <a href={link}>Check My Github Profile</a>
             <BlogList blogs={blogs} title="All Blogs are shown here" />
+            <BlogList blogs={blogs.filter((blog) => blog.author == 'mario')} title="Mario's Blogs Shown here" />
         </div>
      );
 }
