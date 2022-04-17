@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 function getAge(dateString) {
     var today = new Date();
@@ -22,10 +22,18 @@ const Home = () => {
       { title: 'Web dev top tips', body: 'MARIO ipsum...', author: 'mario', id: 3 }
     ]);
 
+    const [name, setName] = useState('mario');
+
     const handleDelete = (id) => {
         const newBlogs = blogs.filter(blog => blog.id !== id );
         setBlogs(newBlogs);
     }
+    
+    useEffect(() => {
+        console.log('use effect ran');
+        console.log(name);        
+    }, [name]);
+
     
     return ( 
         <div className="home">
@@ -35,7 +43,8 @@ const Home = () => {
         <h3>My name is {person.name}, i am {getAge("1998/06/25")} years old and i am from {person.country}.</h3>
         <a href={link}>Check My Github Profile</a>
             <BlogList blogs={blogs} title="All Blogs are shown here" handleDelete={handleDelete} />
-            
+            <button onClick={() => setName('İLHAN')}>Change Name</button>
+            <p>{ name }</p>
         </div>
      );
 }
